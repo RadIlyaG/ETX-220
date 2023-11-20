@@ -1,0 +1,51 @@
+# configuration file
+exit all
+#   version "3.01A14" sw "5.0.1(0.95)" 
+    configure 
+#       Port Configuration
+        port 
+#           Service Virtual Interface- Port Configuration
+            svi 1 
+                no shutdown 
+            exit
+        exit
+#       Flows Configuration
+        flows 
+#           Classifier Profile Configuration
+            classifier-profile "untagged" match-any 
+                match untagged 
+            exit
+            classifier-profile "vlan42" match-any 
+                match vlan 42 
+            exit
+#           Flow Configuration
+            flow "mgt_up" 
+                classifier "untagged" 
+                vlan-tag push vlan 42 p-bit fixed 0 
+                ingress-port svi 1 
+                egress-port ethernet 4/1 queue 0 block 0/1 
+                no shutdown 
+            exit
+            flow "mgt_down" 
+                classifier "vlan42" 
+                no policer 
+                vlan-tag pop vlan 
+                ingress-port ethernet 4/1 
+                egress-port svi 1 queue 0 
+                no shutdown 
+            exit
+        exit
+        router 1 
+            name "Router#1" 
+            interface 1 
+                bind svi 1 
+                dhcp 
+                dhcp-client 
+                    client-id mac 
+                exit
+                no shutdown 
+            exit
+        exit
+    exit
+    configure 
+    exit

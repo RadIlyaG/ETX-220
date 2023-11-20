@@ -1,0 +1,4 @@
+..19:09:36   16/02/2014..********* PAIR 1 start *********
+..19:19:05   16/02/2014..Test 3..11392 fail. Reason: The SEQ_ERR in Generator-2 is 1079272. Should be 0 
+    ********* PAIR 1 FAIL   *********
+

@@ -1,0 +1,333 @@
+# configuration file
+exit all
+    configure 
+#       Terminal Configuration
+        terminal 
+            timeout limited 12 
+        exit
+#       System Configuration
+        system 
+            name "RAD-ETX220" 
+            date-and-time 
+                zone utc -05:00 
+#               SNTP (Simple Network Time Protocol)
+                sntp 
+                    server 1 
+                        address 10.72.173.138 
+                        no shutdown 
+                    exit
+                exit
+            exit
+        exit
+#       Management configuration
+
+        management 
+#           SNMP Configuration
+            snmp 
+                target-params "p" 
+                    message-processing-model snmpv3 
+                    version usm 
+                    security name "initial" level no-auth-no-priv 
+                    no shutdown 
+                exit
+                target "RADView_Server" 
+                    address udp-domain 10.72.173.138
+                    target-params "p"
+                    trap-sync-group 1
+                    no shutdown                 
+                exit
+                bootstrap-notification
+                config-change-notification
+                notify "unmasked" 
+                    tag "unmasked" 
+                    no shutdown 
+                exit
+                trap-sync-group 1
+                     tag-list "unmasked"
+                exit
+            exit
+        exit
+
+
+#       QoS - Configuration
+        qos 
+            policer-profile "1M_8K" 
+                bandwidth cir 1024 cbs 8000 eir 0 ebs 0 
+            exit
+            policer-profile "2M_8K" 
+                bandwidth cir 2048 cbs 8000 eir 0 ebs 0 
+            exit
+            policer-profile "3M_8K" 
+                bandwidth cir 3008 cbs 8000 eir 0 ebs 0 
+            exit
+            policer-profile "4M_8K" 
+                bandwidth cir 4032 cbs 8000 eir 0 ebs 0 
+            exit
+            policer-profile "5M_8K" 
+                bandwidth cir 5056 cbs 8000 eir 0 ebs 0 
+            exit
+            policer-profile "6M_8K" 
+                bandwidth cir 6016 cbs 8000 eir 0 ebs 0 
+            exit
+            policer-profile "7M_8K" 
+                bandwidth cir 7040 cbs 8000 eir 0 ebs 0 
+            exit
+            policer-profile "8M_8K" 
+                bandwidth cir 8000 cbs 8000 eir 0 ebs 0 
+            exit
+            policer-profile "9M_8K" 
+                bandwidth cir 9024 cbs 8000 eir 0 ebs 0 
+            exit
+            policer-profile "10M_16K" 
+                bandwidth cir 10048 cbs 16000 eir 0 ebs 0 
+            exit
+            policer-profile "15M_16K" 
+                bandwidth cir 15040 cbs 16000 eir 0 ebs 0 
+            exit
+            policer-profile "20M_16K" 
+                bandwidth cir 20030 cbs 16000 eir 0 ebs 0 
+            exit
+            policer-profile "30M_16K" 
+                bandwidth cir 30010 cbs 16000 eir 0 ebs 0 
+            exit
+            policer-profile "40M_16K" 
+                bandwidth cir 40000 cbs 16000 eir 0 ebs 0 
+            exit
+            policer-profile "50M_64K" 
+                bandwidth cir 50040 cbs 64000 eir 0 ebs 0 
+            exit
+            policer-profile "60M_64K" 
+                bandwidth cir 60030 cbs 64000 eir 0 ebs 0 
+            exit
+            policer-profile "70M_64K" 
+                bandwidth cir 70010 cbs 64000 eir 0 ebs 0 
+            exit
+            policer-profile "80M_64K" 
+                bandwidth cir 80000 cbs 64000 eir 0 ebs 0 
+            exit
+            policer-profile "90M_64K" 
+                bandwidth cir 90040 cbs 64000 eir 0 ebs 0 
+            exit
+            policer-profile "100M_256K" 
+                bandwidth cir 100000 cbs 256000 eir 0 ebs 0 
+            exit
+            policer-profile "200M_256K" 
+                bandwidth cir 200000 cbs 256000 eir 0 ebs 0 
+            exit
+            policer-profile "300M_256K" 
+                bandwidth cir 300000 cbs 256000 eir 0 ebs 0 
+            exit
+            policer-profile "400M_256K" 
+                bandwidth cir 400000 cbs 256000 eir 0 ebs 0 
+            exit
+            policer-profile "500M_512K" 
+                bandwidth cir 500000 cbs 512000 eir 0 ebs 0 
+            exit
+            policer-profile "600M_512K" 
+                bandwidth cir 600000 cbs 512000 eir 0 ebs 0 
+            exit
+            policer-profile "700M_512K" 
+                bandwidth cir 700000 cbs 512000 eir 0 ebs 0 
+            exit
+            policer-profile "800M_512K" 
+                bandwidth cir 800000 cbs 512000 eir 0 ebs 0 
+            exit
+            policer-profile "900M_512K" 
+                bandwidth cir 900000 cbs 512000 eir 0 ebs 0 
+            exit
+            policer-profile "1000M_512K" 
+                bandwidth cir 1000000 cbs 512000 eir 0 ebs 0 
+            exit
+            queue-block-profile "eline-queue-block" 
+                queue 0 
+                    scheduling strict 
+                    depth 49152 
+                exit
+                queue 1 
+                    scheduling strict 
+                    depth 49152 
+                exit
+                queue 2 
+                    scheduling strict 
+                    depth 49152 
+                exit
+                queue 3 
+                    depth 49152 
+                exit
+                queue 4 
+                    scheduling wfq 80 
+                    depth 49152 
+                exit
+                queue 5 
+                    scheduling wfq 40 
+                    depth 49152 
+                exit
+                queue 6 
+                    scheduling wfq 20 
+                    depth 49152 
+                exit
+                queue 7 
+                    scheduling wfq 4 
+                    depth 49152 
+                exit
+            exit
+            queue-block-profile "Scheduling2" 
+            exit
+            queue-group-profile "eline-queue-group" 
+                queue-block 1/1 
+                    name "Level 1 Block 1" 
+                    profile "Scheduling2" 
+                exit
+                queue-block 0/1 
+                    name "Level 0 Block 1" 
+                    profile "eline-queue-block" 
+                    bind queue 0 queue-block 1/1 
+                exit
+                queue-block 0/2 
+                    name "Level 0 Block 2" 
+                    profile "eline-queue-block" 
+                    bind queue 1 queue-block 1/1 
+                exit
+            exit
+        exit
+#       Port Configuration
+        port 
+#           Ethernet - Port Configuration
+            ethernet 0/101 
+                shutdown 
+                no name 
+            exit
+            ethernet 1/1 
+                shutdown
+                no auto-negotiation
+                speed-duplex 1000-full-duplex
+                egress-mtu 9200 
+                no name 
+            exit
+            ethernet 1/2 
+                shutdown
+                no auto-negotiation
+                speed-duplex 1000-full-duplex
+                egress-mtu 9200 
+                no name 
+            exit
+            ethernet 1/3 
+                shutdown
+                no auto-negotiation
+                speed-duplex 1000-full-duplex
+                egress-mtu 9200 
+                no name 
+            exit
+            ethernet 1/4 
+                shutdown
+                no auto-negotiation
+                speed-duplex 1000-full-duplex
+                egress-mtu 9200 
+                no name 
+            exit
+            ethernet 1/5 
+                shutdown
+                no auto-negotiation
+                speed-duplex 1000-full-duplex 
+                egress-mtu 9200
+                no name 
+            exit
+            ethernet 1/6 
+                shutdown
+                no auto-negotiation
+                speed-duplex 1000-full-duplex 
+                egress-mtu 9200
+                no name 
+            exit
+            ethernet 1/7 
+                shutdown
+                no auto-negotiation
+                speed-duplex 1000-full-duplex 
+                egress-mtu 9200
+                no name 
+            exit
+            ethernet 1/8 
+                shutdown
+                no auto-negotiation
+                speed-duplex 1000-full-duplex 
+                egress-mtu 9200
+                no name 
+            exit
+            ethernet 1/9 
+                shutdown
+                no auto-negotiation
+                speed-duplex 1000-full-duplex 
+                egress-mtu 9200
+                no name 
+            exit
+            ethernet 1/10 
+                shutdown
+                no auto-negotiation
+                speed-duplex 1000-full-duplex 
+                egress-mtu 9200
+                no name 
+            exit
+            ethernet 3/1 
+                shutdown 
+                name "10Gig User Int" 
+                egress-mtu 9200 
+                pm-collection interval 900 
+            exit
+            ethernet 4/1 
+                name "Network 1" 
+                egress-mtu 9200 
+                queue-group profile "eline-queue-group" 
+                pm-collection interval 900 
+            exit
+            ethernet 4/2 
+                shutdown 
+                name "Network 2" 
+                egress-mtu 9200 
+                queue-group profile "eline-queue-group" 
+                pm-collection interval 900 
+            exit
+#           Service Virtual Interface- Port Configuration
+            svi 1 
+                no shutdown 
+            exit
+        exit
+#       Flows Configuration
+        flows 
+#           Classifier Profile Configuration
+            classifier-profile "inband_mgmt" match-any 
+                match vlan 100 
+            exit
+            classifier-profile "match_all" match-any 
+                match all 
+            exit
+            classifier-profile "untagged" match-any 
+                match untagged 
+            exit
+#           Flow Configuration
+            flow "NETtoSVI1" 
+                shutdown 
+                classifier "inband_mgmt" 
+                vlan-tag pop vlan 
+                ingress-port ethernet 4/1 
+                egress-port svi 1 queue 0 
+            exit
+            flow "SVI1toNET" 
+                shutdown 
+                classifier "match_all" 
+                vlan-tag push vlan 100 p-bit fixed 6 
+                ingress-port svi 1 
+                egress-port ethernet 4/1 queue 0 block 0/1 
+            exit
+        exit
+        router 1 
+            name "Router#1" 
+            interface 1 
+                bind svi 1 
+                dhcp-client 
+                    client-id mac 
+                exit
+                shutdown 
+            exit
+        exit
+    exit
+    exit

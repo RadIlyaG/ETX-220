@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=windows-1250">
+  <meta name="generator" content="PSPad editor, www.pspad.com">
+  <style type="text/css">
+    ul.fix {color:red;}
+    ol.fix {color:red;}
+    ul.add {color:blue;}
+    ol.add {color:blue;}
+    li.add {color:blue;}
+    li.fix {color:red;}
+    div.add {color:blue;}
+    div.fix {color:red;}
+    div.cng {color:black;}
+  </style>
+  <title>Changes' history</title>
+  </head>
+  <body>
+   
+  <h4>ATE software upgrade</h4>
+  <!---->
+  <table>    
+    <tr><td>ETX-220A-MP      </td><td><a href="#11">: 21.04.2020</a></td></tr>
+  </table>
+  <!----> 
+    <div id="20">20.10.2023</div>        
+      <div>UnregIdBarcode on Failure</div>
+    <br>  
+    <div id="19">11.10.2023</div>        
+      <div>Remove Ronen from email list</div>
+    <br>  
+    <div id="18">04.10.2023</div>        
+      <div>Report to TCC even MacReg was performed early (SQliteAddLine)</div>
+    <br> 
+    <div id="17">29.06.2023</div>        
+      <div>Perform the <b>Ext Clock</b> before <b>Data Transmission</b> Test and reset UUT before Lock</div>  
+    <br>     
+    <div id="16">28.06.2023</div>        
+     <div>Use ':' instead of '.' as separator in time field of the TCC's log</div>  
+    <br>     
+   <div id="15">19.06.2022</div>        
+     <div>After ReadBarcode - check if UUT's DbrName is equal to GUI's gaSet(DutFullName) (ButRun, CheckTitleDbrNameVsUutDbrName)</div>     
+   <br>     
+   <div id="14">23.08.2021</div>        
+     <div>Add Release/Debug Mode</div>
+   <br> 
+   <div id="13">08.06.2021</div>        
+     <div>::RadAppsPath instead of C:/RadApps</div>
+     <div>Preparations in lib_bc.tcl for new MacReg (with 2 MACs) </div>
+   <br> 
+   <div id="12">03.01.2021</div>        
+     <div>GetOperator reads Employee ID</div>
+   <br>      
+   <div id="11">21.04.2020</div>        
+     <div class="add">Addeed: Compare BootVersion and HwVersion (PS_IDTest)</div>
+     <div class="add">Addeed: Check Operational Status</div>
+   <br>
+   <div id="10">23.09.2019</div>        
+     <div class="cng">Changed: Dying Gasp Tests moved to the beginning</div>
+   <br>
+   <div id="9">17.07.2019</div>        
+     <div class="add">Addeed: New MAC range</div>
+   <br>
+   <div id="8">12.06.2018</div>        
+     <div class="cng">Changed: Full UUT's prompt</div>  
+     <div class="cng">Changed: 8 (instead of 4) DISABLEs during MacBarcode</div> 
+     <div class="add">Addeed: TeraTerminal operation</div>
+   <br>
+   <div id="7">6.05.2018</div>        
+     <div class="add">Addeed: "Check DDR tool" button (GUI)</div>  
+   <br>
+   <div id="6">30.01.2018</div>        
+     <div class="cng">Changed: Not perform Loopback on port 4/2 in units with 3XFP (Loopback)</div>  
+   <br>
+   <div id="5">26.12.2017</div>        
+     <div class="cng">Changed: Not perform catching 'cal_success' and 'ReadWrite' on UUTs with old versions (DdrTest)</div>  
+   <br>
+   <div id="4">18.12.2017</div>        
+     <div class="add">Added: Catching 'cal_success' and 'ReadWrite' during DDR test</div> 
+     <div class="cng">Changed: Configuration Files removed inside the Tester's folder</div>
+     <div class="add">Added: GetInitFile</div>  
+   <br>
+   
+   <div id="3">05.12.2017</div>        
+     <div class="add">Added: Catching Exceptions during up process</div>  
+   <br>
+   
+   <div id="2">08.06.2017</div>        
+     <div class="cng">Changed: Use [le] instead of [info] to read SW (PS_IDTest)</div>  
+     <div class="cng">Changed: Use -x and -S % parameters of tshark (Lib_tshark.tcl and DyingGaspPerf)</div>
+   <br>
+   <div id="1">08.03.2017</div>        
+     <div class="cng">Changed: Log file's name contains ID Barcodes and Pass/Fail</div>  
+     <div class="add">Added: ATE's history</div>
+     <div class="cng">Changed: Traps catching by tshark instead of Scotty</div>
+     <div class="cng">Changed:Configuration files defined by Tester's SW according to DUT's DBR name and SW</div>
+   <br>
+   
+     </body>
+</html>

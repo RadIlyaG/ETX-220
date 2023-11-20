@@ -1,0 +1,11 @@
+set gaSet(box)       "Plastic"
+set gaSet(sw)        "1.0.0(0.8)"
+set gaSet(hw)        "0.0"
+set gaSet(wire)      "4"
+set gaGui(xy) +568+17
+set gaSet(boot)        "1.81"
+set gaSet(soc)        "1.2"
+set gaSet(plEn)     "0"
+set gaSet(iprelay)   ""
+set gaSet(TestMode)    "FT"
+set gaSet(uaf)        "D:/downloads/repeater_1.0.0_0.8_.bin"

@@ -1,0 +1,4 @@
+..15:43:08   06/11/2013..********* PAIR 1 start *********
+..15:43:24   06/11/2013..Test 3..11392 fail. Reason: Unable to set 3000 Ft at link 1 
+    ********* PAIR 1 FAIL   *********
+

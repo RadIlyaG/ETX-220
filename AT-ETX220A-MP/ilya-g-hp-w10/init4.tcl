@@ -1,0 +1,9 @@
+set gaGui(xy) +241+698
+set gaSet(iprelay)   ""
+set gaSet(TestMode)    "AllTests"
+set gaSet(entDUT) "ETX-203AM_VT/AC/2SFP2UTP-10"
+set gaSet(DutInitName) "ETX-203AM_VT.AC.2SFP2UTP-10.tcl"
+set gaSet(ddrRunQty)   "3"
+set gaSet(ddrSOF)   "0"
+set gaSet(pioType) "Usb"
+set gaSet(eraseTitle) "0"

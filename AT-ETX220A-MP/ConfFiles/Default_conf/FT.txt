@@ -1,0 +1,18 @@
+
+##  Delete default mng configuration  ##
+configure router 1
+interface 32
+shutdown
+exit
+no interface 32
+exit
+no router 1
+exit all
+configure flows
+no flow  "mng_access_default_in"
+no flow  "mng_access_default_out"
+no classifier-profile  "mng_all"
+no classifier-profile  "mng_untagged"
+exit all
+configure port
+no svi 96

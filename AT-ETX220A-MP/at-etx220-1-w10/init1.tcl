@@ -1,0 +1,9 @@
+set gaGui(xy) +333+44
+set gaSet(iprelay)   ""
+set gaSet(TestMode)    "AllTests"
+set gaSet(entDUT) "ETX-220A_TMX/DCR/SFP/2XFP/20S/SYE/ESK"
+set gaSet(DutInitName) "ETX-220A_TMX.DCR.SFP.2XFP.20S.SYE.ESK.tcl"
+set gaSet(ddrRunQty)   "20"
+set gaSet(ddrSOF)   "1"
+set gaSet(pioType) "Ex"
+set gaSet(eraseTitle) "0"

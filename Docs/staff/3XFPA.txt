@@ -1,0 +1,28 @@
+exit all
+	config port ethernet 4/2
+	no loopback
+	shutdown
+	functional-mode user
+	no shutdown
+	exit all
+	
+	config flows
+	no flow "1_10__4_1"
+	no flow  "4_1__1_10"
+	
+         flow "1_10__4_2"
+         			classifier "all"
+        			 ingress-port ethernet 1/10
+        			 egress-port ethernet 4/2 queue 0 block 0/1
+        			 no shutdown
+         exit
+
+         flow "4_2__1_10"
+         			classifier "all"
+        			 ingress-port ethernet 4/2
+        			 egress-port ethernet 1/10 queue 0 block 0/1
+         			no shutdown
+        exit all
+        config port ethernet 4/1
+        loopback remote
+        exit all
