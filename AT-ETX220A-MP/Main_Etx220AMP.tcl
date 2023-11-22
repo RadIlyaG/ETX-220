@@ -432,7 +432,8 @@ proc Leds {run} {
     GREEN \'LINK\' leds of 1 Giga ports are blinking\n\
     GREEN \'LINK\' leds of 10 Giga ports are ON\n\
     ORANGE \'ACT\' leds of 10 Giga ports are blinking\n\
-    EXT CLK's GREEN \'SD\' led is ON"
+    EXT CLK's GREEN \'SD\' led is ON\n\
+    Verify fans rotate"
     set res [DialogBox -type "OK Fail" -icon /images/question -title "LED Test" -message $txt]
     update
     
