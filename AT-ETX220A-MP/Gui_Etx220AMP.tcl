@@ -421,6 +421,8 @@ proc ButRun {} {
   }
    
   if {$ret==0} {
+    AddToPairLog $gaSet(pair) "$gaSet(operatorID) $gaSet(operator)"
+    
     IPRelay-Green
     set ret [OpenRL]
     puts "OpenRL ret:$ret"
