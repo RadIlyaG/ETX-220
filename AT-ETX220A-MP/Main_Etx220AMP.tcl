@@ -353,6 +353,9 @@ proc ExtClkUnlocked {run} {
 proc ExtClkLocked {run} {
   global gaSet
   Power all on
+  set ret [Login]
+  if {$ret!=0} {return $ret}
+
   set cf $gaSet(ExtClkCF) 
   set cfTxt "EXT CLK"
   set ret [DownloadConfFile $cf $cfTxt 1]
