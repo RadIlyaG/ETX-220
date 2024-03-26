@@ -1436,3 +1436,26 @@ proc ReadIdBarcodeFromPage3 {} {
   
   return $ret
 }
+# ***************************************************************************
+# ExtClkTxTest
+# ***************************************************************************
+proc ExtClkTxTest {mode} {
+  global gaSet buffer
+  Status "ExtClkTxTest $mode"
+  set ret [Login]
+  if {$ret!=0} {
+    #set ret [Login]
+    if {$ret!=0} {return $ret}
+  }
+  
+  set com $gaSet(comDut)
+  Send $com "exit all\r" stam 0.25 
+  if {$mode=="en"} {
+    set frc "force-t4-as-t0"
+  } else {
+    set frc "no force-t4-as-t0"
+  }
+  set ret [Send $com "con sys clock domain 1\r" (1)]
+  set ret [Send $com "$frc\r" (1)]
+  
+}

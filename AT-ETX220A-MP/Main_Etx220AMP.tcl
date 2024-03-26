@@ -344,6 +344,8 @@ proc DataTransmissionTestPerf {} {
 proc ExtClkUnlocked {run} {
   global gaSet
   Power all on
+  set ret [ExtClkTxTest dis]
+  if {$ret!=0} {return $ret}
   set ret [ExtClkTest Unlocked]
   return $ret
 }
@@ -360,11 +362,15 @@ proc ExtClkLocked {run} {
   set cfTxt "EXT CLK"
   set ret [DownloadConfFile $cf $cfTxt 1]
   if {$ret!=0} {return $ret}
+  set ret [ExtClkTxTest en]
+  if {$ret!=0} {return $ret}
   set ret [ExtClkTest Locked]
   if {$ret!=0} {
     Power all off
     after 3000
     Power all on
+    set ret [ExtClkTxTest en]
+    if {$ret!=0} {return $ret}
     set ret [ExtClkTest Locked]
     if {$ret!=0} {return $ret}
   }  
@@ -415,6 +421,9 @@ proc Leds {run} {
     set ret [DownloadConfFile $cf $cfTxt 1]
     if {$ret!=0} {return $ret}
   }
+  
+  set ret [ExtClkTxTest en]
+    if {$ret!=0} {return $ret}
   
   set gRelayState red
   IPRelay-LoopRed
