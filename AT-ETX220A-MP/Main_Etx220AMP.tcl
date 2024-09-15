@@ -32,7 +32,7 @@ proc BuildTests {} {
   if {$gaSet(chbPsTest)==1} {
     RLSound::Play information
     set lTestsAllTests [list]
-    set res [DialogBox -icon /images/question -aspect 3000 -type "Yes No" \
+    set res [DialogBoxRamzor -icon /images/question -aspect 3000 -type "Yes No" \
         -message "Do you want to perform the FactoryDefault and download the Conf. file?"]
     if {$res=="Yes"} {
       lappend lTestsAllTests SetToDefault DyingGaspConf
@@ -223,7 +223,7 @@ proc DyingGaspTest_2 {run} {
     SendEmail "ETX220A-MP" "Manual Test"
     RLSound::Play information
     set txt "Remove the AC PSs and insert DC PSs"
-    set res [DialogBox -type "OK Cancel" -icon /images/question -title "Change PS" -message $txt]
+    set res [DialogBoxRamzor -type "OK Cancel" -icon /images/question -title "Change PS" -message $txt]
     update
     if {$res!="OK"} {
       return -2
@@ -446,7 +446,7 @@ proc Leds {run} {
     ORANGE \'ACT\' leds of 10 Giga ports are blinking\n\
     EXT CLK's GREEN \'SD\' led is ON\n\
     Verify fans rotate"
-    set res [DialogBox -type "OK Fail" -icon /images/question -title "LED Test" -message $txt]
+    set res [DialogBoxRamzor -type "OK Fail" -icon /images/question -title "LED Test" -message $txt]
     update
     
     catch {exec pskill.exe -t $pingId}
@@ -485,7 +485,7 @@ proc Leds {run} {
     }
     RLSound::Play information
     set txt "Verify on PS-$ps that RED led is ON"
-    set res [DialogBox -type "OK Fail" -icon /images/question -title "LED Test" -message $txt]
+    set res [DialogBoxRamzor -type "OK Fail" -icon /images/question -title "LED Test" -message $txt]
     update
     if {$res!="OK"} {
       set gaSet(fail) "LED Test failed"
@@ -496,7 +496,7 @@ proc Leds {run} {
     
     RLSound::Play information
     set txt "Remove PS-$ps and verify that led is OFF"
-    set res [DialogBox -type "OK Cancel" -icon /images/info -title "LED Test" -message $txt]
+    set res [DialogBoxRamzor -type "OK Cancel" -icon /images/info -title "LED Test" -message $txt]
     update
     if {$res!="OK"} {
       set gaSet(fail) "PS_ID Test failed"
@@ -527,7 +527,7 @@ proc Leds {run} {
     
     RLSound::Play information
     set txt "Assemble PS-$ps"
-    set res [DialogBox -type "OK Cancel" -icon /images/info -title "LED Test" -message $txt]
+    set res [DialogBoxRamzor -type "OK Cancel" -icon /images/info -title "LED Test" -message $txt]
     update
     if {$res!="OK"} {
       set gaSet(fail) "PS_ID Test failed"
@@ -556,7 +556,7 @@ proc Leds {run} {
   
   RLSound::Play information
   set txt "Remove the EXT CLK cable and verify the SD led is OFF"
-  set res [DialogBox -type "OK Fail" -icon /images/question -title "LED Test" -message $txt]
+  set res [DialogBoxRamzor -type "OK Fail" -icon /images/question -title "LED Test" -message $txt]
   update
   if {$res!="OK"} {
     set gaSet(fail) "LED Test failed"
@@ -569,7 +569,7 @@ proc Leds {run} {
   if {$ret!=0} {return $ret} 
   RLSound::Play information
   set txt "Verify the TST/ALM led is off"
-  set res [DialogBox -type "OK Fail" -icon /images/question -title "LED Test" -message $txt]
+  set res [DialogBoxRamzor -type "OK Fail" -icon /images/question -title "LED Test" -message $txt]
   update
   if {$res!="OK"} {
     set gaSet(fail) "LED Test failed"
@@ -580,7 +580,7 @@ proc Leds {run} {
   
   RLSound::Play information
   set txt "Disconnect all cables and optic fibers and verify GREEN leds are off"
-  set res [DialogBox -type "OK Fail" -icon /images/question -title "LED Test" -message $txt]
+  set res [DialogBoxRamzor -type "OK Fail" -icon /images/question -title "LED Test" -message $txt]
   update
   if {$res!="OK"} {
     set gaSet(fail) "LED Test failed"
@@ -611,7 +611,7 @@ proc Leds {run} {
     Power 2 off
     RLSound::Play information
     set txt "Remove PS-2"
-    set res [DialogBox -type "OK Cancel" -icon /images/info -title "LED Test" \
+    set res [DialogBoxRamzor -type "OK Cancel" -icon /images/info -title "LED Test" \
       -message $txt -bg yellow -font {TkDefaultFont 11}]
     update
     

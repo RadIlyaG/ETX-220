@@ -1,0 +1,4 @@
+init*.tcl
+*.bak
+ConfFiles/Default_conf/
+AT-ETX220A-MP/ConfFiles/Default_conf/

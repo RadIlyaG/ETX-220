@@ -140,6 +140,9 @@ source lib_SQlite.tcl
 source Lib_GetOperator.tcl
 source LibUrl.tcl
 
+source Lib_Ramzor.tcl
+source lib_EcoCheck.tcl
+
 if ![info exists gaSet(pioType)] {
   set gaSet(pioType) Ex
 }

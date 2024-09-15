@@ -180,7 +180,7 @@ proc CheckBcOk {} {
   if {$gaSet(useExistBarcode)==0} {
     RLSound::Play information
     SendEmail "ETX-220A" "Read barcodes"
-    set ret [DialogBox -title "barcode" -text "Enter the ETX-220A's barcode" -ent1focus 1\
+    set ret [DialogBoxRamzor -title "barcode" -text "Enter the ETX-220A's barcode" -ent1focus 1\
         -type "Ok Cancel" -entQty 1 -entPerRow 1 -entLab DUT -icon /images/info] 
     #-type "Ok Cancel Skip" 12/10/2020 09:35:49    
   	if {$ret == "Cancel" } {

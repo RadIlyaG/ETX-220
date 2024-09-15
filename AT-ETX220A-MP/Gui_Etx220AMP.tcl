@@ -328,6 +328,7 @@ proc About {} {
 proc ButRun {} {
   global gaSet gaGui glTests gRelayState
   puts "\r[MyTime] ButRun"; update
+  Ramzor green on
   set gaSet(runStatus) ""
   set gaSet(act) 1
   focus $gaGui(tbrun)
@@ -373,7 +374,9 @@ proc ButRun {} {
   }
   
   if {$ret==0} {
+    Ramzor red on
     set ret [GuiReadOperator]
+    Ramzor green on
     parray gaSet *arco*
     parray gaSet *rato*
     if {$ret!=0} {
@@ -406,7 +409,7 @@ proc ButRun {} {
     RLSound::Play information
     set txt "Be aware!\r\rYou are about to perform tests in Debug mode.\r\r\
     If you are not sure, in the GUI's \'Tools\'->\'Release / Debug mode\' choose \"Release Mode\""
-    set res [DialogBox -icon images/info -type "Continue Abort" -text $txt -default 1 -aspect 2000 -title "ETX-220"]
+    set res [DialogBoxRamzor -icon images/info -type "Continue Abort" -text $txt -default 1 -aspect 2000 -title "ETX-220"]
     if {$res=="Abort"} {
       set gaSet(log.$gaSet(pair)) c:/logs/${gaSet(logTime)}.txt
       set ret -2
@@ -450,6 +453,8 @@ proc ButRun {} {
     IPRelay-LoopRed
     puts "ButRun ret:$ret"
   }
+  
+  Ramzor red on
   if {$ret==0} {     
     #exec C:\\RLFiles\\Tools\\Btl\\passbeep.exe &
     RLSound::Play pass
@@ -499,6 +504,10 @@ proc ButRun {} {
   $gaGui(tbrun) configure -relief raised -state normal
   $gaGui(tbstop) configure -relief sunken -state disabled
   $gaGui(tbpaus) configure -relief sunken -state disabled
+  
+  set res [DialogBox -type "OK" -icon /images/info -title "Finish" -message "The test is done" ]
+  update
+  Ramzor all off
   
   if {$gaSet(eraseTitle)==1} {
     wm title . "$gaSet(pair) : "
