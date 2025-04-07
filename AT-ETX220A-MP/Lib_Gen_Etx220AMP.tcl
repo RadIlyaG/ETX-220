@@ -633,34 +633,51 @@ proc GetDbrName {} {
 #     return -1
 #   }
    
-  set javaLoc $gaSet(javaLocation)
-  catch {exec $javaLoc\\java -jar $::RadAppsPath/OI4Barcode.jar $barcode} b
+  # set javaLoc $gaSet(javaLocation)
+  # catch {exec $javaLoc\\java -jar $::RadAppsPath/OI4Barcode.jar $barcode} b
   set fileName MarkNam_$barcode.txt
   after 1000
-  if ![file exists MarkNam_$barcode.txt] {
-    set gaSet(fail) "File $fileName is not created. Verify the Barcode"
-    #exec C:\\RLFiles\\Tools\\Btl\\failbeep.exe &
-    RLSound::Play failbeep
+  # if ![file exists MarkNam_$barcode.txt] {
+    # set gaSet(fail) "File $fileName is not created. Verify the Barcode"
+    # #exec C:\\RLFiles\\Tools\\Btl\\failbeep.exe &
+    # RLSound::Play failbeep
+	  # Status "Test FAIL"  red
+    # DialogBox -aspect 2000 -type Ok -message $gaSet(fail) -icon images/error
+    # pack $gaGui(frFailStatus)  -anchor w
+	  # $gaSet(runTime) configure -text ""
+  	# return -1
+  # }
+  
+  # set fileId [open "$fileName"]
+    # seek $fileId 0
+    # set res [read $fileId]    
+  # close $fileId
+  
+  # #set txt "$barcode $res"
+  # set txt "[string trim $res]"
+  #set gaSet(entDUT) $txt
+  
+  foreach {ret resTxt} [::RLWS::Get_OI4Barcode $barcode] {}
+  if {$ret=="0"} {
+    #  set dbrName [dict get $ret "item"]
+    set dbrName $resTxt
+  } else {
+    set gaSet(fail) $resTxt
+    RLSound::Play fail
 	  Status "Test FAIL"  red
-    DialogBox -aspect 2000 -type Ok -message $gaSet(fail) -icon images/error
+    DialogBoxRamzor -aspect 2000 -type Ok -message $gaSet(fail) -icon images/error
     pack $gaGui(frFailStatus)  -anchor w
 	  $gaSet(runTime) configure -text ""
   	return -1
   }
-  
-  set fileId [open "$fileName"]
-    seek $fileId 0
-    set res [read $fileId]    
-  close $fileId
-  
-  #set txt "$barcode $res"
-  set txt "[string trim $res]"
-  #set gaSet(entDUT) $txt
+  set txt "[string trim $dbrName]"
   set gaSet(entDUT) ""
   puts "GetDbrName <$txt>"
   
-  set initName [regsub -all / $res .]
-  set gaSet(DutFullName) $res
+  set initName [regsub -all / $dbrName .]
+  puts "GetDbrName dbrName:<$dbrName>"
+  puts "GetDbrName initName:<$initName>"
+  set gaSet(DutFullName) $dbrName
   set gaSet(DutInitName) $initName.tcl
   
   file delete -force MarkNam_$barcode.txt
@@ -919,21 +936,11 @@ proc GetDbrSW {barcode} {
   global gaSet gaGui
   set gaSet(dbrSW) "" 
   
-#   set javaLoc1  C:\\Program\ Files\\Java\\jre6\\bin\\
-#   set javaLoc2 C:\\Program\ Files\ (x86)\\Java\\jre6\\bin\\
-#   if {[file exist $javaLoc1]} {
-#     set javaLoc $javaLoc1
-#   } elseif {[file exist $javaLoc2]} {
-#     set javaLoc $javaLoc2
-#   } else {
-#     set gaSet(fail) "Java application is missing"
-#     return -1
-#   }  
-  set javaLoc $gaSet(javaLocation)
-  catch {exec $javaLoc\\java -jar $::RadAppsPath/SWVersions4IDnumber.jar $barcode} b
+  #set javaLoc $gaSet(javaLocation)
+  #catch {exec $javaLoc\\java -jar $::RadAppsPath/SWVersions4IDnumber.jar $barcode} b
+  foreach {res b} [::RLWS::Get_SwVersions $barcode] {}
   puts "GetDbrSW b:<$b>" ; update
   after 1000
-  file delete -force SW_4_$barcode.txt
   set swIndx [lsearch $b $gaSet(swPack)]  
   if {$swIndx<0} {
     set gaSet(fail) "There is no SW ID for $gaSet(swPack) ID:$barcode. Verify the Barcode."
@@ -1142,33 +1149,48 @@ proc UpdateInitsToTesters {} {
 proc CheckTitleDbrNameVsUutDbrName {} {
   global gaSet
   set barcode $gaSet(1.barcode1) 
-  set fileName MarkNam_$barcode.txt
-  if [file exists $fileName] {
-    file delete -force $fileName
-    after 1000
-  }
-  set res [catch {exec $gaSet(javaLocation)\\java -jar $::RadAppsPath/OI4Barcode.jar $barcode} b]
-  puts "CTDNVUDN barcode:<$barcode> res:<$res> b:<$b>"
+  # set fileName MarkNam_$barcode.txt
+  # if [file exists $fileName] {
+    # file delete -force $fileName
+    # after 1000
+  # }
+  # set res [catch {exec $gaSet(javaLocation)\\java -jar $::RadAppsPath/OI4Barcode.jar $barcode} b]
+  # puts "CTDNVUDN barcode:<$barcode> res:<$res> b:<$b>"
   
-  after 1000
-  if ![file exists $fileName] {
-    set gaSet(fail) "File $fileName is not created. Verify the Barcode"
-    #exec C:\\RLFiles\\Tools\\Btl\\failbeep.exe &
+  # after 1000
+  # if ![file exists $fileName] {
+    # set gaSet(fail) "File $fileName is not created. Verify the Barcode"
+    # #exec C:\\RLFiles\\Tools\\Btl\\failbeep.exe &
+    # RLSound::Play fail
+	  # Status "Test FAIL"  red
+    # DialogBox -aspect 2000 -type Ok -message $gaSet(fail) -icon images/error -title "Get DbrName Problem"
+    # pack $gaGui(frFailStatus)  -anchor w
+	  # $gaSet(runTime) configure -text ""
+  	# return -1
+  # }
+  
+  # set fileId [open "$fileName"]
+    # seek $fileId 0
+    # set res [read $fileId]    
+  # close $fileId
+  # catch {file delete -force $fileName}
+  
+  # set uutDbrName "[string trim $res]"
+  
+  foreach {ret resTxt} [::RLWS::Get_OI4Barcode $barcode] {}
+  if {$ret=="0"} {
+    #  set dbrName [dict get $ret "item"]
+    set dbrName $resTxt
+  } else {
+    set gaSet(fail) $resTxt
     RLSound::Play fail
 	  Status "Test FAIL"  red
-    DialogBox -aspect 2000 -type Ok -message $gaSet(fail) -icon images/error -title "Get DbrName Problem"
+    DialogBoxRamzor -aspect 2000 -type Ok -message $gaSet(fail) -icon images/error
     pack $gaGui(frFailStatus)  -anchor w
 	  $gaSet(runTime) configure -text ""
   	return -1
   }
-  
-  set fileId [open "$fileName"]
-    seek $fileId 0
-    set res [read $fileId]    
-  close $fileId
-  catch {file delete -force $fileName}
-  
-  set uutDbrName "[string trim $res]"
+  set uutDbrName "[string trim $dbrName]"
   puts "CTDNVUDN uutDbrName:<$uutDbrName> gaSet(DutFullName):<$gaSet(DutFullName)>"
   if {$uutDbrName != $gaSet(DutFullName)} {
     set gaSet(fail) "Mismatch between UUT's Barcode and GUI" 
